@@ -142,21 +142,23 @@ def balanced_subsample(x,y,subsample_size=1.0):
       iter = iter + 1    
     return xs,ys
 
-##arrays to keep track of scores
-tprs = []
-aucs = []
-score1 = []
-score2 = []
-score3 = []
-score4 = []
-score5 = []
-tps = []
-tns = []
-fps = []
-fns = []
+
 
 ##function to run keras model
 def run_keras_model(X, y):
+    
+  tprs = []
+  aucs = []
+  score1 = []
+  score2 = []
+  score3 = []
+  score4 = []
+  score5 = []
+  tps = []
+  tns = []
+  fps = []
+  fns = []
+
   for train, test in kfold.split(X, y):
       model = get_model()
       oversample = SMOTE()
@@ -186,10 +188,10 @@ def print_results(score1, score2, score3, score4, score5, tps, tns, fps, fns):
   print("Precision: %0.2f (+/- %0.2f)" % (calculate_mean(score4), calculate_sd(score4) * 2))
   print("F1: %0.2f (+/- %0.2f)" % (calculate_mean(score5), calculate_sd(score5) * 2))
 
-  print("TP: %0.2f (+/- %0.2f)" % (calculate_mean(tps), calculate_sd(tps) * 2))
-  print("TN: %0.2f (+/- %0.2f)" % (calculate_mean(tns), calculate_sd(tns) * 2))
-  print("FP: %0.2f (+/- %0.2f)" % (calculate_mean(fps), calculate_sd(fps) * 2))
-  print("FN: %0.2f (+/- %0.2f)" % (calculate_mean(fns), calculate_sd(fns) * 2))
+  print("True Positives: %0.2f (+/- %0.2f)" % (calculate_mean(tps), calculate_sd(tps) * 2))
+  print("True Negatives: %0.2f (+/- %0.2f)" % (calculate_mean(tns), calculate_sd(tns) * 2))
+  print("False Positives: %0.2f (+/- %0.2f)" % (calculate_mean(fps), calculate_sd(fps) * 2))
+  print("False Negatives: %0.2f (+/- %0.2f)" % (calculate_mean(fns), calculate_sd(fns) * 2))
   
 ##function that computes predictor importance
 def compute_predictor_importance():
@@ -200,16 +202,19 @@ def compute_predictor_importance():
 
 ##function to run sklearn models
 def run_sklearn_model_comp(X,y):
-    h = .02  # step size in the mesh
+    
+    h = .02
+    
     names = ["Nearest Neighbors", "Linear SVM", "RBF SVM", "Gaussian Process",
             "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
             "Naive Bayes", "QDA"]
+    
     classifiers = [
-        DecisionTreeClassifier(max_depth=10, class_weight='balanced'),
-        RandomForestClassifier(max_depth=10, n_estimators=10, max_features=1, class_weight='balanced'),
+        DecisionTreeClassifier(max_depth=5, class_weight='balanced'),
+        RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1, class_weight='balanced'),
         MLPClassifier(alpha=1, max_iter=10000),
         SVC(kernel="linear", C=0.025),
-        sklearn.linear_model.LogisticRegression(max_iter=10000)]
+        sklearn.linear_model.LogisticRegression(max_iter=1000)]
 
     for name, clf in zip(names, classifiers):
 
