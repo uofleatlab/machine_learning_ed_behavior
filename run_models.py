@@ -182,16 +182,16 @@ def run_keras_model(X, y):
 
 ##function that prints the results to the console
 def print_results(score1, score2, score3, score4, score5, tps, tns, fps, fns):
-  print("Accuracy: %0.2f (+/- %0.2f)" % (calculate_mean(score1), calculate_sd(score1) * 2))
-  print("Sensitivity: %0.2f (+/- %0.2f)" % (calculate_mean(score2), calculate_sd(score2) * 2))
-  print("Specificity: %0.2f (+/- %0.2f)" % (calculate_mean(score3), calculate_sd(score3) * 2))
-  print("Precision: %0.2f (+/- %0.2f)" % (calculate_mean(score4), calculate_sd(score4) * 2))
-  print("F1: %0.2f (+/- %0.2f)" % (calculate_mean(score5), calculate_sd(score5) * 2))
+  print("Accuracy: %0.2f (+/- %0.2f)" % (calculate_mean(score1), calculate_sd(score1)))
+  print("Sensitivity: %0.2f (+/- %0.2f)" % (calculate_mean(score2), calculate_sd(score2)))
+  print("Specificity: %0.2f (+/- %0.2f)" % (calculate_mean(score3), calculate_sd(score3)))
+  print("Precision: %0.2f (+/- %0.2f)" % (calculate_mean(score4), calculate_sd(score4)))
+  print("F1: %0.2f (+/- %0.2f)" % (calculate_mean(score5), calculate_sd(score5)))
 
-  print("True Positives: %0.2f (+/- %0.2f)" % (calculate_mean(tps), calculate_sd(tps) * 2))
-  print("True Negatives: %0.2f (+/- %0.2f)" % (calculate_mean(tns), calculate_sd(tns) * 2))
-  print("False Positives: %0.2f (+/- %0.2f)" % (calculate_mean(fps), calculate_sd(fps) * 2))
-  print("False Negatives: %0.2f (+/- %0.2f)" % (calculate_mean(fns), calculate_sd(fns) * 2))
+  print("True Positives: %0.2f (+/- %0.2f)" % (calculate_mean(tps), calculate_sd(tps)))
+  print("True Negatives: %0.2f (+/- %0.2f)" % (calculate_mean(tns), calculate_sd(tns)))
+  print("False Positives: %0.2f (+/- %0.2f)" % (calculate_mean(fps), calculate_sd(fps)))
+  print("False Negatives: %0.2f (+/- %0.2f)" % (calculate_mean(fns), calculate_sd(fns)))
   
 ##function that computes predictor importance
 def compute_predictor_importance():
